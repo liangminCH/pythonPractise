@@ -86,6 +86,65 @@ for newhandle in handles:
 
 WebDriverWait(driver, 10).until(lambda driver: driver.find_element_by_css_selector('button.printBtn'))
 #driver.find_element_by_xpath("//button[@class='printBtn']").click()
-driver.switch_to.window(handle)
-driver.switch_to.window(newhandle)
+# sleep(1)
+# driver.switch_to.window(handle)
+# sleep(1)
+# driver.switch_to.window(newhandle)
+sleep(3)
+WebDriverWait(driver, 120).until(
+    lambda _dirver: _dirver.execute_script('''return $("option").length > 0;'''))
+jstt = '''
+        var array_name = ["Z00","Z01","Z02","Z03","Z04","Z05"];
+        var myArray = new Array();
+        var i=0
+        $("option").each(function(){
+            var pnode = {};
+            if(array_name.indexOf($(this).attr("name")) > -1)
+            {//则包含该元素
+                pnode.name = $(this).attr("name");
+                pnode.text = $(this).text();
+                myArray[i] = pnode;
+                i++;
+            }
+            //window.console.log($(this).text());
+            //window.console.log($(this).attr("name"));
+            //window.console.log($(this).attr("value"));
+        });
+        //window.alert(myArray.length)
+        return myArray;'''
+myArray = driver.execute_script(jstt)
+print("==============================================")
+print(len(myArray))
+for arr in myArray:
+    print(arr.get("name"))
+    print(arr.get("text"))
+print("==============================================")
+
+print("========start check======")
+
+# /html//table[@id='nsrxxForm']//th[.='纳税人信息']
+# //table[@id='nsrxxForm']//thead//tr//th
+# /html[1]/body[1]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]
+driver.switch_to.frame("Z00")
+# value1 = driver.find_element_by_xpath('//*[@id="nsrxxForm"]/thead[1]/tr[1]/th[1]').text
+# print(value1)
+# #
+# driver.switch_to.default_content()
+# driver.execute_script('''$("#page-tree").val($("option[name='Z05']").val()).trigger("change");''')
+# sleep(1)
+# driver.execute_script('''$("#page-tree").val($("option[name='Z00']").val()).trigger("change");''')
+
+#本月数 //*[@id="sbbxxForm"]/tbody[1]/tr[4]/td[4]
+#//*[@id="sbbxxForm"]/tbody/tr[4]/td[4]/input
+
+value = driver.find_element_by_xpath('#//*[@id="sbbxxForm"]/tbody/tr[4]/td[4]/input').get_attribute("value")
+#'//*[@id="nsrxxForm"]/tbody[1]/tr[1]/td[2]'
+#///input[@name='sblx']
+#value = driver.find_element_by_xpath('//*[@id="nsrxxForm"]/tbody[1]/tr[1]/td[2]').get_attribute("value")
+print("本月数value : ", value)
+
+
+
+
+
 
