@@ -9,7 +9,7 @@
 #
 # 2，获取信息代码
 
-
+#o
 import psutil;
 import os;
 import signal;
