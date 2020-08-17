@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://D:/PyTaxInit/.idea/PyTaxInit.iml" filepath="D:/PyTaxInit/.idea/PyTaxInit.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/pythonPractise.iml" filepath="$PROJECT_DIR$/.idea/pythonPractise.iml" />
     </modules>
   </component>
